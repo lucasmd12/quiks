@@ -4,14 +4,6 @@ plugins {
   id "dev.flutter.flutter-gradle-plugin"
 }
 
-def localProperties = new Properties()
-def localPropertiesFile = rootProject.file('../local.properties')
-if (localPropertiesFile.exists()) {
-  localPropertiesFile.withReader('UTF-8') { reader ->
-    localProperties.load(reader)
-  }
-}
-
 android {
   namespace "com.lucasbeats.federacao"
   compileSdk 35
@@ -31,16 +23,12 @@ android {
     jvmTarget = '17'
   }
 
-  sourceSets {
-    main.java.srcDirs += 'src/main/kotlin'
-  }
-
   defaultConfig {
     applicationId "com.lucasbeats.federacao"
-    minSdkVersion 24
-    targetSdkVersion 35
-    versionCode 4
-    versionName "2.1.0"
+    minSdk 24
+    targetSdk 35
+    versionCode flutter.versionCode
+    versionName flutter.versionName
     multiDexEnabled true
     ndk {
       abiFilters "armeabi-v7a", "arm64-v8a"
@@ -49,9 +37,8 @@ android {
 
   buildTypes {
     profile {
+      initWith debug
       signingConfig signingConfigs.debug
-      minifyEnabled false
-      shrinkResources false
       debuggable false
       profileable true
     }
@@ -69,9 +56,6 @@ flutter {
 }
 
 dependencies {
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.1.0"
   coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'
   implementation 'androidx.multidex:multidex:2.0.1'
-  implementation 'androidx.core:core-ktx:1.12.0'
-  implementation 'androidx.appcompat:appcompat:1.6.1'
 }

@@ -26,6 +26,12 @@ workflows:
       - name: Dependências
         script: flutter pub get
 
+      - name: Forçar Gradle e AGP compatível
+        script: |
+          cd android
+          ./gradlew wrapper --gradle-version 8.4
+          echo "android.newDsl=false" >> gradle.properties
+
       - name: Build APK Profile
         script: |
           cd $CM_BUILD_DIR

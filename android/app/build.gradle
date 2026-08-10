@@ -1,7 +1,7 @@
 plugins {
     id "com.android.application"
-    id "org.jetbrains.kotlin.android"
-    id "dev.flutter.flutter-gradle-plugin"
+    id "dev.flutter.flutter-gradle-plugin" // Movido para cima
+    id "org.jetbrains.kotlin.android"    // ID completo
 }
 
 android {
@@ -39,8 +39,7 @@ android {
             profileable true
         }
         release {
-            // Adicione sua configuração de release aqui se necessário
-            signingConfig signingConfigs.debug // Ajuste para sua chave de produção depois
+            signingConfig signingConfigs.debug 
         }
     }
 

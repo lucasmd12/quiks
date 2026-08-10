@@ -10,7 +10,7 @@ workflows:
           include: true
 
     environment:
-      flutter: stable
+      flutter: 3.24.5
       vars:
         JVM_ARGS: "-Xmx12g"
 
@@ -25,6 +25,12 @@ workflows:
 
       - name: Dependências
         script: flutter pub get
+
+      - name: Forçar Gradle e AGP compatível
+        script: |
+          cd android
+          ./gradlew wrapper --gradle-version 8.4
+          echo "android.newDsl=false" >> gradle.properties
 
       - name: Build APK Profile
         script: |

@@ -32,6 +32,7 @@ workflows:
       - name: Alinhar Gradle Wrapper
         script: |
           cd android
+          chmod +x gradlew
           # Usando 8.10.2 para bater com seu arquivo de propriedades
           ./gradlew wrapper --gradle-version 8.10.2
 
